@@ -1,0 +1,8 @@
+.ensime_cache/
+target/
+*.log
+.sbtserver
+*.lock
+.ensime
+/.idea/
+/project/project/
