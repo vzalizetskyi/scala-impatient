@@ -51,6 +51,57 @@ countdown(5)
 example, the product of the characters in "Hello" is 9415087488L.
 */
 
-var res : Long = 1
-for (ch <- "Hello") res *= ch.toLong
-res
+var result : Long = 1
+for (ch <- "Hello") result *= ch.toLong
+result
+
+/*
+7. Solve the preceding exercise without writing a loop. (Hint: Look at the StringOps
+Scaladoc.)
+*/
+
+"Hello".map(_.toLong).product
+
+/*
+8. Write a function product(s : String) that computes the product, as described in the
+preceding exercises.
+*/
+
+def product (s : String) = {
+  s.map(_.toLong).product
+}
+
+product("Hello")
+
+//9. Make the function of the preceding exercise a recursive function.
+
+def recursiveProduct(s: String): Long = {
+  if (s.tail != "") s.head.toLong * recursiveProduct(s.tail) else s.head.toLong
+}
+
+recursiveProduct("Hello")
+
+/*
+10. Write a function that computes x^n , where n is an integer. Use the following recursive
+definition:
+• x^n = y · y if n is even and positive, where y = x^n / 2 .
+• x^n = x · x^n – 1 if n is odd and positive.
+• x^0 = 1.
+• x^n = 1 / x – n if n is negative.
+Don’t use a return statement.
+*/
+
+import math.pow
+
+def func(x:Double,n:Int) : Double = {
+  if (n>0 && n%2==0) {
+    val y = pow(x,n)/2
+    y*y
+  }
+  else if (n>0 && n%2!=0) x*pow(x,n-1)
+  else if (n<0) 1/x-n
+  else 1
+}
+
+func(10,2)
+

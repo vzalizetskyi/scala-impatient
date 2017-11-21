@@ -6,3 +6,4 @@ target/
 .ensime
 /.idea/
 /project/project/
+src/test/
