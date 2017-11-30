@@ -77,6 +77,40 @@ a.remove(i) for each index.
 
 val array8 = ArrayBuffer(1, -2, -3, 4, -5)
 
-val positionsOfTheNegativeElements= for (i <- array8.indices if array8(i) < 0) yield (i)
+val positionsOfTheNegativeElements= for (i <- array8.indices if array8(i) < 0) yield i
 
 for (i <- positionsOfTheNegativeElements.drop(1).reverse) array8.remove(i)
+
+
+/*
+9. Improve the solution of the preceding exercise by collecting the positions that should be moved
+and their target positions. Make those moves and truncate the buffer. Don’t copy any elements
+before the first unwanted element.
+ */
+
+
+/*
+10. Make a collection of all time zones returned by
+java.util.TimeZone.getAvailableIDs that are in America. Strip off the
+"America/" prefix and sort the result.
+*/
+
+import java.util.TimeZone
+
+TimeZone.getAvailableIDs.filter(_.startsWith("America/")).map(_.stripPrefix("America/")).sorted
+
+/*
+11. Import java.awt.datatransfer._ and make an object of type SystemFlavorMap
+with the call
+val flavors = SystemFlavorMap.getDefaultFlavorMap().asInstanceOf[SystemFlavorMap]
+Then call the getNativesForFlavor method with parameter
+DataFlavor.imageFlavor and get the return value as a Scala buffer. (Why this obscure
+class? It’s hard to find uses of java.util.List in the standard Java library.)
+*/
+
+import scala.collection.JavaConverters
+import scala.collection.mutable.Buffer
+import java.awt.datatransfer._
+
+val flavors = SystemFlavorMap.getDefaultFlavorMap.asInstanceOf[SystemFlavorMap]
+val flavorBuffer: Buffer[String] = JavaConverters.asScalaBufferConverter(flavors.getNativesForFlavor(DataFlavor.imageFlavor)).asScala
