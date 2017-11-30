@@ -1,1 +1,1 @@
-# scala-impatient
+# scala-impatient 2nd edition
