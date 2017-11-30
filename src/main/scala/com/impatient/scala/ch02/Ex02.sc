@@ -3,7 +3,7 @@
   Write a function that computes this value.
 */
 
-def signum (number: Int) : Int = {
+def signum(number: Int): Int = {
   if (number > 0) 1 else if (number < 0) -1 else 0
 }
 
@@ -29,19 +29,19 @@ res2: Int = 0
 */
 
 var y = 0
-val x:Unit = y = 1
+val x: Unit = y = 1
 
 /*
 4. Write a Scala equivalent for the Java loop
 for (int i = 10; i >= 0; i--) System.out.println(i);
 */
 
-for (i <- 10 to (0,-1)) yield i
+for (i <- 10 to(0, -1)) yield i
 
 //5. Write a procedure countdown(n: Int) that prints the numbers from n to 0.
 
-def countdown (n: Int) {
-  for (i <- n to (0,-1)) print(i+" ")
+def countdown(n: Int) {
+  for (i <- n to(0, -1)) print(i + " ")
 }
 
 countdown(5)
@@ -51,7 +51,7 @@ countdown(5)
 example, the product of the characters in "Hello" is 9415087488L.
 */
 
-var result : Long = 1
+var result: Long = 1
 for (ch <- "Hello") result *= ch.toLong
 result
 
@@ -67,7 +67,7 @@ Scaladoc.)
 preceding exercises.
 */
 
-def product (s : String) = {
+def product(s: String) = {
   s.map(_.toLong).product
 }
 
@@ -93,15 +93,55 @@ Don’t use a return statement.
 
 import math.pow
 
-def func(x:Double,n:Int) : Double = {
-  if (n>0 && n%2==0) {
-    val y = pow(x,n)/2
-    y*y
+def func(x: Double, n: Int): Double = {
+  if (n > 0 && n % 2 == 0) {
+    val y = pow(x, n) / 2
+    y * y
   }
-  else if (n>0 && n%2!=0) x*pow(x,n-1)
-  else if (n<0) 1/x-n
+  else if (n > 0 && n % 2 != 0) x * pow(x, n - 1)
+  else if (n < 0) 1 / x - n
   else 1
 }
 
-func(10,2)
+func(10, 2)
 
+/*
+11. Define a string interpolator date so that you can define a java.time.LocalDate as
+date"$year-$month-$day". You need to define an “implicit” class with a date
+method, like this:
+implicit class DateInterpolator(val sc: StringContext) extends AnyVal {
+def date(args: Any*): LocalDate = . . .
+}
+args(i) is the value of the ith expression. Convert each to a string and then to an integer, and
+pass them to the LocalDate.of method. If you already know some Scala, add error
+handling. Throw an exception if there aren’t three arguments, or if they aren’t integers, or if they
+aren’t separated by dashes. (You get the strings in between the expressions as sc.parts.)
+*/
+
+import java.time.LocalDate
+
+implicit class DateInterpolator(val sc: StringContext) extends AnyVal {
+
+  def date(args: Any*): LocalDate = {
+    try {
+      if (args.length != 3) throw new IllegalArgumentException("there aren’t three arguments")
+      val (year,month,day) = (args(0).toString.toInt, args(1).toString.toInt, args(2).toString.toInt)
+      for (x <- sc.parts) if (x.length > 0 && !x.equals("-")) throw new IllegalArgumentException("Date parts aren’t separated by dashes")
+      LocalDate.of(year, month, day)
+    }
+    catch {
+      case ex: NumberFormatException =>
+        println("Date parts aren’t integer")
+        throw ex
+      case ex: IllegalArgumentException =>
+        println("See exception message for detail")
+        throw ex
+    }
+  }
+}
+
+val year = 2017
+val month = 11
+val day = 30
+
+date"$year#$month-$day"
