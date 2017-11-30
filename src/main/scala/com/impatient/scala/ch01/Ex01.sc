@@ -19,7 +19,7 @@ the result differ from 3? (Hint: The res variables are your friend.)
 
 import math.{pow, sqrt}
 
-3-pow(sqrt(3),2)
+3 - pow(sqrt(3), 2)
 
 /*
 res0: Double = 4.440892098500626E-16

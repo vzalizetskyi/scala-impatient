@@ -4,7 +4,7 @@ import scala.collection.mutable.ArrayBuffer
 import util.Random
 
 val n = 10
-val a  = for (i <- 0 until n) yield Random.nextInt(n)
+val a = for (i <- 0 until n) yield Random.nextInt(n)
 
 /*
 2. Write a loop that swaps adjacent elements of an array of integers. For example, Array(1,
@@ -30,15 +30,15 @@ array, in their original order, followed by all values that are zero or negative
 order.
 */
 
-val array3= Array(-9, 0, 2, -22, 5)
+val array3 = Array(-9, 0, 2, -22, 5)
 
-val (o,t) = array3.partition( _ > 0)
+val (o, t) = array3.partition(_ > 0)
 o ++ t
 
 //5. How do you compute the average of an Array[Double]?
 
 val array4 = Array(3.1, 5.6, 3.14, 7, 1)
-array.sum/array.length
+array.sum / array.length
 
 /*
 6. How do you rearrange the elements of an Array[Int] so that they appear in reverse sorted
@@ -77,7 +77,7 @@ a.remove(i) for each index.
 
 val array8 = ArrayBuffer(1, -2, -3, 4, -5)
 
-val positionsOfTheNegativeElements= for (i <- array8.indices if array8(i) < 0) yield i
+val positionsOfTheNegativeElements = for (i <- array8.indices if array8(i) < 0) yield i
 
 for (i <- positionsOfTheNegativeElements.drop(1).reverse) array8.remove(i)
 

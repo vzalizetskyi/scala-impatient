@@ -125,7 +125,7 @@ implicit class DateInterpolator(val sc: StringContext) extends AnyVal {
   def date(args: Any*): LocalDate = {
     try {
       if (args.length != 3) throw new IllegalArgumentException("there aren’t three arguments")
-      val (year,month,day) = (args(0).toString.toInt, args(1).toString.toInt, args(2).toString.toInt)
+      val (year, month, day) = (args(0).toString.toInt, args(1).toString.toInt, args(2).toString.toInt)
       for (x <- sc.parts) if (x.length > 0 && !x.equals("-")) throw new IllegalArgumentException("Date parts aren’t separated by dashes")
       LocalDate.of(year, month, day)
     }
