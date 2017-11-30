@@ -88,6 +88,7 @@ and their target positions. Make those moves and truncate the buffer. Don’t co
 before the first unwanted element.
  */
 
+// TODO: realize the 9 exercise form chapter 3
 
 /*
 10. Make a collection of all time zones returned by
